@@ -1,0 +1,164 @@
+﻿<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+<meta http-equiv="Page-Enter" content="blendtrans(duration=2.0)"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <link href="css/style.css" rel="stylesheet"/>
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet"/>
+
+    <!--DB-->
+    <script>
+            arregloNacionales=[
+            {'id':1,'title':'Código Nacional de Procedimientos Penales','archivo':"CNPP"}
+            ];
+        arregloEstatales=[
+            {'id':1,'title':'Ley de Mecanismos Alternativos de Solución de Controversias en Materia Penal para el Estado','archivo':"Decreto562"},
+            {'id':2,'title':'Declaratoria de entrada en vigor del CNPP en el Estado de San Luis Potosí','archivo':"Decreto752"},
+            {'id':3,'title':'Ley de la Defensoría Pública del Estado de San Luis Potosí','archivo':"Decreto767"},
+            {'id':4,'title':'Ley para la Protección de Personas que Intervienen en el Proceso Penal en el Estado de San Luis Potosí','archivo':"Decreto768"},
+            {'id':5,'title':'Ley de Víctimas para el Estado de San Luis Potosí','archivo':"Decreto776"},
+            {'id':6,'title':'Reformas, Adiciones y Derogaciones de y a la Ley de Justicia para Menores del Estado de San Luis Potosí','archivo':"Decreto777"},
+            {'id':7,'title':'Reformas a la Ley de Extinción de Dominio del Estado de San Luis Potosí','archivo':"Decreto787"},
+            {'id':8,'title':'Reformas y Adiciones a la Ley del Sistema de Seguridad Pública del Estado de San Luis Potosí','archivo':"Decreto788"},
+            {'id':9,'title':'Ley para la Administración de Bienes Asegurados, Decomisados, Embargados o Abandonados para el Estado de San Luis Potosí','archivo':"Decreto791"},
+            {'id':10,'title':'Código Penal del Estado de San Luis Potosí','archivo':"Decreto793"},
+            {'id':11,'title':'Ley de Ejecución de Medidas Cautelares; Penas y Medidas de Seguridad para el Estado de San Luis Potosí','archivo':"Decreto794"},
+            {'id':12,'title':'Ley de Justicia Indígena y Comunitaria para el Estado de San Luis Potosí','archivo':"Decreto795"},
+            {'id':13,'title':'Reforma al artículo 190 y Adición al párrafo último al artículo 52 de la Ley Orgánica del Poder Judicial del Estado de San Luis Potosí','archivo':"Decreto796"},
+        ];        
+
+    </script>
+    <script src="js/jquery.js"></script>
+
+    <script>
+    
+        $(document).bind("mobileinit", function(){
+        	$.mobile.allowCrossDomainPages = true;
+        });
+/*
+        function init() {
+             document.addEventListener("deviceready",startup,false);
+        }        
+
+        function startup() {
+            db = window.openDatabase("main","1","reformap",200000);
+            db.transaction(initDB,dbError,dbReady);
+        }
+
+        function initDB(tx) {
+            alert('initDB');
+                tx.executeSql("create table if not exists leyes(id INTEGER PRIMARY KEY AUTOINCREMENT, titulo TEXT, contenido LONGTEXT, fecha DATE, archivo TEXT, tipo TINYINT, lastupdated DATE, token TEXT)");
+
+        }
+ 
+        
+    function dbReady() {
+      alert('dbReady');
+        db.transaction(function(tx) {
+            alert('transaction');
+            tx.executeSql("select id,titulo from leyes where tipo=2 order by id desc", [], function(tx, results) {
+                alert('executeSql');
+                for(var i=0;i<result.length;i++){
+                    alert(result.rows(i).titulo);
+                    arregloEstatales.push({title:result.rows(i).titulo,id:result.rows(i).id})
+                    alert(arregloEstatales[i]);
+                }
+            });
+        },function(e){
+            alert(e);
+        });          
+          
+    }
+        
+    function dbError(e) {alert(e);}
+        
+*/
+function dump(obj) {
+    var out = '';
+    for (var i in obj) {
+        out += i + ": " + obj[i] + "\n";
+    }
+
+    alert(out);
+
+    // or, if you wanted to avoid alerts...
+
+    var pre = document.createElement('pre');
+    pre.innerHTML = out;
+    document.body.appendChild(pre)
+}
+    </script>     
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+<!--    <script src="js/ng-cordova.min.js"></script>-->
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+   <script>
+   var arregloNotas=[];
+   document.addEventListener("deviceready", onDeviceReady, false);
+   
+   function onDeviceReady() {
+        var db = window.openDatabase("Database", "1.0", "ReformaP", 200000);
+        db.transaction(populateDB, errorCB, successCB);
+    }
+
+    // Populate the database 
+    //
+    function populateDB(tx) {
+//        tx.executeSql('DROP TABLE IF EXISTS DEMO');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS notas (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, data text,archivo text)');
+        
+//        tx.executeSql('INSERT INTO notas (data,archivo) VALUES ("First row","CNPP")');
+//        tx.executeSql('INSERT INTO DEMO (id, data) VALUES (2, "Second row")');
+    }
+
+    // Transaction error callback
+    //
+    function queryDB(tx) {
+        tx.executeSql('SELECT * FROM notas', [], querySuccess, errorCB);
+    }
+
+    // Transaction success callback
+    //
+    function querySuccess(tx, results) {
+        var len = results.rows.length;
+        //console.log("DEMO table: " + len + " rows found.");
+        for (var i=0; i<len; i++){
+           // console.log("Row = " + i + " ID = " + results.rows.item(i).id + " Data =  " + results.rows.item(i).data);
+           titulox=results.rows.item(i).data;
+           arregloNotas.push({
+            id:results.rows.item(i).id,
+            data:titulox,
+            archivo:results.rows.item(i).archivo
+//            data:titulox.substr(0,30)
+           })
+        }
+    }
+    
+    function errorCB(err) {
+        console.log("Error processing SQL: "+err.code);
+    }
+    
+    function successCB() {
+        var db = window.openDatabase("Database", "1.0", "ReformaP", 200000);
+        db.transaction(queryDB, errorCB);
+    }
+   </script>
+    <!-- your app's js -->
+    <script src="js/app.js" charset="UTF-8"></script>
+    <script src="js/controllers.js" charset="UTF-8"></script>
+  </head>
+
+  <body ng-app="starter">
+    <ion-nav-view></ion-nav-view>
+  </body>
+</html>
