@@ -6,10 +6,10 @@
         id        = "com.emsavalles.nsjpslp"
         version   = "1.0.3">
 
-    <name>Nuevo sistema de Justicia Penal</name>
+    <name>Nuevo Sistema de Justicia Penal</name>
 
     <description>
-        Aplicacion Móvil del Nuevo Sistema de Justicia Penal
+        Aplicación Móvil del Nuevo Sistema de Justicia Penal
     </description>
 
     <author href="http://reformapenalslp.gob.mx" email="contacto@reformapenalslp.gob.mx">
