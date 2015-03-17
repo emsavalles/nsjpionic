@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+ï»¿<?xml version="1.0" encoding="UTF-8"?>
 
 <!-- config.xml reference: https://build.phonegap.com/docs/config-xml -->
 <widget xmlns     = "http://www.w3.org/ns/widgets"
@@ -9,7 +9,7 @@
     <name>Nuevo Sistema de Justicia Penal</name>
 
     <description>
-        Aplicación Móvil del Nuevo Sistema de Justicia Penal
+        AplicaciÃ³n MÃ³vil del Nuevo Sistema de Justicia Penal
     </description>
 
     <author href="http://reformapenalslp.gob.mx" email="contacto@reformapenalslp.gob.mx">
